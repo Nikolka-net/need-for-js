@@ -35,6 +35,7 @@ function getQuantityElements(heightElement) { /* возвр. коли-во эл.
 
 function startGame() {
     start.classList.add('hide'); //запуск функции
+    gameArea.innerHTML = ''; /* очистка поля перед след. стартом */
 
     for (let i = 0; i < getQuantityElements(100) + 1; i++) {/* добавл. линии на дороге через цикл, 100px длина линии */
         const line = document.createElement('div'); /* созд. линию */
@@ -56,8 +57,12 @@ function startGame() {
         gameArea.appendChild(enemy);
     }
 
+    setting.score = 0; /* изначально 0 очков */
     setting.start = true;    /* смена при старте */
     gameArea.appendChild(car); /* вставляем в поле дочер. элемент - машину */
+    car.style.left = gameArea.offsetWidth / 2 - car.offsetWidth / 2; /* задаём расположение нашего авто, высч. его центр */
+    car.style.top = 'auto'; /* задаём расположение нашего авто */
+    car.style.bottom = '10px';
     /* gameArea.appendChild(music); */ /* вставляем в поле дочер. элемент - music */
     setting.x = car.offsetLeft;  /* добавляем свойство left, x координата по гориз. оси  */
     setting.y = car.offsetTop;  /* добавляем свойство top, y координата по вертик. оси  */
@@ -67,6 +72,8 @@ function startGame() {
 
 function playGame() {
     if (setting.start) {   /* (setting.start === true) пока true, игра будет выполняться, (setting.start) */
+        setting.score += setting.speed; /* увеличиваем очки в зависи-и от скорости */
+        score.innerHTML = 'SCORE<br>' + setting.score; /* выводим значение на стр. */
         moveRoad();   /* функция движение дороги */
         moveEnemy(); /* запуск др. машин */
         if (keys.ArrowLeft && setting.x > 0) { /* при нажатии налево < на единицу, зависит от скорости; ширина > 0*/
@@ -131,8 +138,18 @@ function moveEnemy() { /* для появления др. машин */
     let enemy = document.querySelectorAll('.enemy');
     enemy.forEach(function (item) {
         let carRect = car.getBoundingClientRect();
-        /* console.log('carRect: ', carRect); */
         let enemyRect = item.getBoundingClientRect(); /* обращаемся к др. авто */
+
+        if (carRect.top <= enemyRect.bottom && /* до переда car < чем до багажника enemy от верх. края дороги */
+            carRect.right >= enemyRect.left &&
+            carRect.left <= enemyRect.right &&
+            carRect.bottom >= enemyRect.top) {
+            setting.start = false; /* при этих условиях останавливаем игру */
+            console.warn('ДТП');
+            start.classList.remove('hide'); /* удаляем класс hide, чтобы появ. начать игру */
+            start.style.top = score.offsetHeight; /* сдвигаем очки вниз на высоту кнопки старта */
+        }
+
         item.y += setting.speed / 2; /* + скорость; "/2" чтобы cars двигались, < их скорость */
         item.style.top = item.y + 'px'; /* присваиваем значение */
         if (item.y >= gameArea.offsetHeight) {
