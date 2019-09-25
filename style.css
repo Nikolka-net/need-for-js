@@ -138,3 +138,9 @@ h table {
     background: #fff;
     left: 145px;
 }
+
+.music {
+    position: absolute;
+    top: -100px;
+    right: -50px;
+}
