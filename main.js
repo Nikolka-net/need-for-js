@@ -1,13 +1,13 @@
 const score = document.querySelector('.score'),
     start = document.querySelector('.start'),
     gameArea = document.querySelector('.gameArea'), /* игровое поле */
-    car = document.createElement('div'); /* создаём новый элемент div, машину */
-/* music = document.createElement('embed'); */ /* + музыку */
+    car = document.createElement('div'), /* создаём новый элемент div, машину */
+    music = document.createElement('embed'); /* + музыку */
 
-/* music.setAttribute('src', './audio.mp3');
-music.setAttribute('type', 'audio/mp3'); 
-music.classList.add('music'); 
- */
+music.setAttribute('src', './audio.mp3');
+music.setAttribute('type', 'audio/mp3');
+music.classList.add('music');
+
 car.classList.add('car'); //созданному div добавляем класс car
 
 const setting = { /* объект: количество очков, скорость */
@@ -63,7 +63,7 @@ function startGame() {
     car.style.left = gameArea.offsetWidth / 2 - car.offsetWidth / 2; /* задаём расположение нашего авто, высч. его центр */
     car.style.top = 'auto'; /* задаём расположение нашего авто */
     car.style.bottom = '10px';
-    /* gameArea.appendChild(music); */ /* вставляем в поле дочер. элемент - music */
+    gameArea.appendChild(music); /* вставляем в поле дочер. элемент - music */
     setting.x = car.offsetLeft;  /* добавляем свойство left, x координата по гориз. оси  */
     setting.y = car.offsetTop;  /* добавляем свойство top, y координата по вертик. оси  */
 
@@ -91,9 +91,9 @@ function playGame() {
         car.style.left = setting.x + 'px';  /* передаём в стили изменение left в px */
         car.style.top = setting.y + 'px'; /* изменения в top */
         requestAnimationFrame(playGame); /* игра запускалась вновь - рекурсия */
-    }/*  else {
-        music.remove(); 
-    } */
+    } else {
+        music.remove();
+    }
 }
 
 function startRun(event) {

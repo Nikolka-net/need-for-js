@@ -170,7 +170,8 @@ h table {
 }
 
 .music {
-    position: absolute;
-    top: -100px;
-    right: -50px;
+    position: fixed;
+    top: -84px;
+    right: 20px;
+    z-index: 300;
 }
