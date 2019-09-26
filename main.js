@@ -8,6 +8,12 @@ music.setAttribute('src', './audio.mp3');
 music.setAttribute('type', 'audio/mp3');
 music.classList.add('music');
 
+const crash = new Audio('./crash.mp3'); /* звук крушения */
+let allow = false; /* аудио не загружено */
+crash.addEventListener('loadeddata', () => { /* проверка загрузки аудио */
+    allow = true;
+});
+
 car.classList.add('car'); //созданному div добавляем класс car
 
 const setting = { /* объект: количество очков, скорость */
@@ -170,12 +176,16 @@ function moveEnemy() { /* для появления др. машин */
         let carRect = car.getBoundingClientRect();
         let enemyRect = item.getBoundingClientRect(); /* обращаемся к др. авто */
 
-        if (carRect.top <= enemyRect.bottom && /* до переда car < чем до багажника enemy от верх. края дороги */
+        if (carRect.top - 3 <= enemyRect.bottom && /* до переда car < чем до багажника enemy от верх. края дороги */
             carRect.right >= enemyRect.left &&
             carRect.left <= enemyRect.right &&
             carRect.bottom - 5 >= enemyRect.top) {
             setting.start = false; /* при этих условиях останавливаем игру */
             console.warn('ДТП');
+
+            if (allow) { /* проверка, если аудио загружено */
+                crash.play(); /* звук крушения */
+            }
             start.classList.remove('hide'); /* удаляем класс hide, чтобы появ. начать игру */
             start.style.top = score.offsetHeight; /* сдвигаем очки вниз на высоту кнопки старта */
         }

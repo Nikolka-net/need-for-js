@@ -115,7 +115,7 @@ h table {
 .car,
 .enemy {
     width: 50px;
-    height: 108px;
+    height: 100px;
     background: transparent url('./images/player.png') no-repeat center/cover;
     position: absolute;
 }
@@ -182,6 +182,10 @@ h table {
     outline: none;
 }
 
+.start>button:hover {
+    opacity: 0.6;
+}
+
 .easy {
     background: rgb(9, 151, 16);
 }
@@ -212,6 +216,6 @@ h table {
 .music {
     position: fixed;
     top: -84px;
-    right: 0;
+    right: 10px;
     z-index: 300;
 }
