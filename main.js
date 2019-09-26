@@ -14,7 +14,8 @@ const setting = { /* объект: количество очков, скорос
     start: false,
     score: 0,
     speed: 3,
-    traffic: 3
+    traffic: 3,
+    level: 0
 };
 
 /* Названия клавиш */
@@ -33,7 +34,24 @@ function getQuantityElements(heightElement) { /* возвр. коли-во эл.
     return Math.ceil(gameArea.offsetHeight / heightElement); /* высоту стр. / на параметр, чтобы узнать коли-во линий */
 }
 
-function startGame() {
+function startGame(event) { /* определяем на что нажимаем */
+
+    if (event.target.classList.contains('start')) { /* опред. что кликнули мимо кнопок */
+        return; /* чтобы функция не выполнялась */
+    }
+    if (event.target.classList.contains('easy')) { /* опред. на какую кнопку нажали */
+        setting.speed = 3;
+        setting.traffic = 3;
+    }
+    if (event.target.classList.contains('medium')) {
+        setting.speed = 5; /* меняем скорость и траффик */
+        setting.traffic = 3;
+    }
+    if (event.target.classList.contains('hard')) {
+        setting.speed = 7;
+        setting.traffic = 2;
+    }
+
     start.classList.add('hide'); //запуск функции
     gameArea.innerHTML = ''; /* очистка поля перед след. стартом */
 
@@ -48,7 +66,7 @@ function startGame() {
 
     for (let i = 0; i < getQuantityElements(100 * setting.traffic); i++) {/* созд. др. cars, сложность зависит от traffic */
         const enemy = document.createElement('div');
-        let enemyImg = Math.floor((Math.random() * 2) + 1); /* для выбора случайных машин */
+        let enemyImg = Math.floor((Math.random() * 5) + 1); /* для выбора случайных машин */
         enemy.classList.add('enemy');
         enemy.y = -100 * setting.traffic * (i + 1); /* расстояние м/у др. cars в зависимости от сложности - traffic */
         enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px'; /* случайное положение от ширины дороги; округляем это значение; 50 ширина авто, чтобы не выезжал за край */
@@ -70,26 +88,38 @@ function startGame() {
     requestAnimationFrame(playGame); /* вызов функции playGame - отрисовка в браузере след. шага */
 }
 
-function playGame() {
+function playGame() { /* ускорение при наборе очков */
+    if (setting.score > 3000 && setting.level == 0) {
+        ++setting.speed;
+        ++setting.level;
+    }
+    else if (setting.score > 6000 && setting.level == 1) {
+        ++setting.speed;
+        ++setting.level;
+    }
+    else if (setting.score > 12000 && setting.level == 2) {
+        ++setting.speed;
+        ++setting.level;
+    }
+    setting.score += setting.speed; /* увеличиваем очки в зависи-и от скорости */
+    score.innerHTML = 'SCORE<br>' + setting.score; /* выводим значение на стр. */
+    moveRoad();   /* функция движение дороги */
+    moveEnemy(); /* запуск др. машин */
+    if (keys.ArrowLeft && setting.x > 0) { /* при нажатии налево < на единицу, зависит от скорости; ширина > 0*/
+        setting.x -= setting.speed;
+    }
+    if (keys.ArrowRight && setting.x < (gameArea.offsetWidth - car.offsetWidth)) { /* не < шир. дороги - шир. car>; на 1 */
+        setting.x += setting.speed;
+    }
+    if (keys.ArrowDown && setting.y < (gameArea.offsetHeight - car.offsetHeight)) { /* < высоты дороги и авто */
+        setting.y += setting.speed; /* при нажатии вниз сдвиг будет по вертикали */
+    }
+    if (keys.ArrowUp && setting.y > 0) { /* car не должен упир. в верх. */
+        setting.y -= setting.speed;
+    }
+    car.style.left = setting.x + 'px';  /* передаём в стили изменение left в px */
+    car.style.top = setting.y + 'px'; /* изменения в top */
     if (setting.start) {   /* (setting.start === true) пока true, игра будет выполняться, (setting.start) */
-        setting.score += setting.speed; /* увеличиваем очки в зависи-и от скорости */
-        score.innerHTML = 'SCORE<br>' + setting.score; /* выводим значение на стр. */
-        moveRoad();   /* функция движение дороги */
-        moveEnemy(); /* запуск др. машин */
-        if (keys.ArrowLeft && setting.x > 0) { /* при нажатии налево < на единицу, зависит от скорости; ширина > 0*/
-            setting.x -= setting.speed;
-        }
-        if (keys.ArrowRight && setting.x < (gameArea.offsetWidth - car.offsetWidth)) { /* не < шир. дороги - шир. car>; на 1 */
-            setting.x += setting.speed;
-        }
-        if (keys.ArrowDown && setting.y < (gameArea.offsetHeight - car.offsetHeight)) { /* < высоты дороги и авто */
-            setting.y += setting.speed; /* при нажатии вниз сдвиг будет по вертикали */
-        }
-        if (keys.ArrowUp && setting.y > 0) { /* car не должен упир. в верх. */
-            setting.y -= setting.speed;
-        }
-        car.style.left = setting.x + 'px';  /* передаём в стили изменение left в px */
-        car.style.top = setting.y + 'px'; /* изменения в top */
         requestAnimationFrame(playGame); /* игра запускалась вновь - рекурсия */
     } else {
         music.remove();
@@ -143,7 +173,7 @@ function moveEnemy() { /* для появления др. машин */
         if (carRect.top <= enemyRect.bottom && /* до переда car < чем до багажника enemy от верх. края дороги */
             carRect.right >= enemyRect.left &&
             carRect.left <= enemyRect.right &&
-            carRect.bottom >= enemyRect.top) {
+            carRect.bottom - 5 >= enemyRect.top) {
             setting.start = false; /* при этих условиях останавливаем игру */
             console.warn('ДТП');
             start.classList.remove('hide'); /* удаляем класс hide, чтобы появ. начать игру */
@@ -153,8 +183,10 @@ function moveEnemy() { /* для появления др. машин */
         item.y += setting.speed / 2; /* + скорость; "/2" чтобы cars двигались, < их скорость */
         item.style.top = item.y + 'px'; /* присваиваем значение */
         if (item.y >= gameArea.offsetHeight) {
+            let enemyImg = Math.floor((Math.random() * 5) + 1); /* для выбора случ. машин без перезапуска */
             item.y = -100 * setting.traffic; /*возврат cars вверх с сохра-м traffic(плотности движения)  */
             item.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px'; /* Чтобы авто выстраивались рандомно(случайно) */
+            item.style.background = `transparent url(./images/enemy${enemyImg}.png) no-repeat center / cover`; /* для выбора случ. машин без перезапуска */
         }
     });
 

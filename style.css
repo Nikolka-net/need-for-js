@@ -109,7 +109,7 @@ h table {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .car,
@@ -118,6 +118,11 @@ h table {
     height: 108px;
     background: transparent url('./images/player.png') no-repeat center/cover;
     position: absolute;
+}
+
+.game {
+    display: flex;
+    height: 100%;
 }
 
 .gameArea {
@@ -139,6 +144,9 @@ h table {
 
 .start {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
     left: 0;
     top: 0;
@@ -149,9 +157,41 @@ h table {
     color: #fff;
     font-size: 1.5rem;
     background: #000;
-    cursor: pointer;
     font-family: sans-serif;
     font-weight: 700;
+}
+
+.start>button {
+    margin: 0 10px;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 10%;
+    border-radius: 6px;
+    font-family: sans-serif;
+    font-size: 14px;
+    padding: 4px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.start>button:focus {
+    outline: none;
+}
+
+.easy {
+    background: rgb(9, 151, 16);
+}
+
+.medium {
+    background: rgb(10, 49, 133);
+}
+
+.hard {
+    background: rgb(168, 13, 34);
 }
 
 .score {
@@ -172,6 +212,6 @@ h table {
 .music {
     position: fixed;
     top: -84px;
-    right: 20px;
+    right: 0;
     z-index: 300;
 }
