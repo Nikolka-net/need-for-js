@@ -1,0 +1,221 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+h:focus {
+    outline: 0;
+}
+
+h ins {
+    text-decoration: none;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+h table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.hide {
+    display: none !important;
+}
+
+.car,
+.enemy {
+    width: 50px;
+    height: 100px;
+    background: transparent url('../images/player.png') no-repeat center/cover;
+    position: absolute;
+}
+
+.game {
+    display: flex;
+    height: 100%;
+}
+
+.gameArea {
+    width: 300px;
+    height: 100%;
+    margin: auto;
+    background: #222222;
+    position: relative;
+    overflow: hidden;
+}
+
+.line {
+    position: absolute;
+    width: 10px;
+    height: 50px;
+    background: #fff;
+    left: 145px;
+}
+
+.start {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 2rem 0;
+    text-align: center;
+    z-index: 200;
+    color: #fff;
+    font-size: 1.5rem;
+    background: #000;
+    font-family: sans-serif;
+    font-weight: 700;
+}
+
+.start>button {
+    margin: 0 10px;
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 10%;
+    border-radius: 6px;
+    font-family: sans-serif;
+    font-size: 14px;
+    padding: 4px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.start>button:focus {
+    outline: none;
+}
+
+.start>button:hover {
+    opacity: 0.6;
+}
+
+.easy {
+    background: rgb(9, 151, 16);
+}
+
+.medium {
+    background: rgb(10, 49, 133);
+}
+
+.hard {
+    background: rgb(168, 13, 34);
+}
+
+.score {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #000;
+    padding: 1rem 0;
+    z-index: 200;
+    font-size: 1.5em;
+    color: skyblue;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 500;
+}
+
+.music {
+    position: fixed;
+    top: -84px;
+    right: 10px;
+    z-index: 300;
+}
