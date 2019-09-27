@@ -71,6 +71,7 @@ td {
 
 body {
     line-height: 1;
+    position: relative;
 }
 
 ol,
@@ -218,4 +219,21 @@ h table {
     top: -84px;
     right: 10px;
     z-index: 300;
+}
+
+.topResult {
+    color: #fff;
+    z-index: 400;
+    position: absolute;
+    top: 3%;
+    left: 28%;
+    width: 14%;
+    font-size: 1.1em;
+    text-align: center;
+    background: #a00b73;
+    border-radius: 6px;
+    padding: 0.4rem 0;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    display: none;
 }

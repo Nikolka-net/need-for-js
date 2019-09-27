@@ -4,6 +4,10 @@ const score = document.querySelector('.score'),
     car = document.createElement('div'), /* создаём новый элемент div, машину */
     music = document.createElement('embed'); /* + музыку */
 
+
+let topScore = localStorage.getItem('topScore'); /* получ. счёт из локального(глобального) хранилища */
+let topResult = document.querySelector('.topResult'); /* добавл. блок с рекордом, он невидим */
+
 music.setAttribute('type', 'audio/mp3');
 music.classList.add('music');
 
@@ -14,6 +18,8 @@ crash.addEventListener('loadeddata', () => { /* проверка загрузк�
 });
 
 car.classList.add('car'); //созданному div добавляем класс car
+
+
 
 const setting = { /* объект: количество очков, скорость */
     start: false,
@@ -59,6 +65,7 @@ function startGame(event) { /* определяем на что нажимаем
 
     start.classList.add('hide'); //запуск функции
     gameArea.innerHTML = ''; /* очистка поля перед след. стартом */
+    topResult.style.display = 'none'; /* блок с рекордом исчезает при перезапуске */
 
     for (let i = 0; i < getQuantityElements(100) + 1; i++) {/* добавл. линии на дороге через цикл, 100px длина линии */
         const line = document.createElement('div'); /* созд. линию */
@@ -182,6 +189,12 @@ function moveEnemy() { /* для появления др. машин */
             carRect.bottom - 5 >= enemyRect.top) {
             setting.start = false; /* при этих условиях останавливаем игру */
             console.warn('ДТП');
+
+            if (topScore < setting.score) {
+                localStorage.setItem('topScore', setting.score); /* сохр. счёта в локальном хранилище, если старое < нового */
+                topResult.style.display = 'block'; /* появл. блок с рекордом */
+                topResult.innerHTML = 'Рекорд побит!';
+            }
 
             if (allow) { /* проверка, если аудио загружено */
                 crash.play(); /* звук крушения */
