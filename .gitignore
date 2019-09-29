@@ -35,6 +35,9 @@ package.json
 package-lock.json
 settings.json
 .eslintrc.js
+nfjs-win32-x64/*
+main2.js
+script.js
 
 # End of https://www.gitignore.io/api/windows
 

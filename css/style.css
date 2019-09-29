@@ -217,8 +217,9 @@ h table {
 .music {
     position: fixed;
     top: -84px;
-    right: 10px;
+    right: 2%;
     z-index: 300;
+
 }
 
 .topResult {
