@@ -1,6 +1,6 @@
 ## need-for-js
 ## game racing
-
+## this is the training project
 ![racing](https://monosnap.com/image/1t6AEgxxcrILKkPQaLphRsSE1XofKy)
 
 ### Чтобы поиграть перейдите по ссылке https://nikolka-net.github.io/need-for-js/
