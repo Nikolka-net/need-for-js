@@ -29,15 +29,14 @@ $RECYCLE.BIN/
 *.lnk
 
 node_modules/*
-.bowerrc
-gulpfile.js
-package.json
-package-lock.json
+#.bowerrc
+#gulpfile.js
+#package.json
+#package-lock.json
 settings.json
-.eslintrc.js
+#.eslintrc.js
 nfjs-win32-x64/*
-main2.js
-script.js
+#main2.js
+#script.js
 
 # End of https://www.gitignore.io/api/windows
-

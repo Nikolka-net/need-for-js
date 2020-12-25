@@ -1,0 +1,25 @@
+{
+  "name": "nfjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nikolka-net/need-for-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nikolka-net/need-for-js/issues"
+  },
+  "homepage": "https://github.com/Nikolka-net/need-for-js#readme",
+  "devDependencies": {
+    "electron": "^6.0.10",
+    "electron-packager": "^14.0.6",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  }
+}
