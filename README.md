@@ -1,6 +1,6 @@
 # need-for-js
 # game racing
 
-![racing](https://github.com/Nikolka-net/need-for-js/blob/master/images/gif/racing.gif)
+![racing](https://monosnap.com/image/1t6AEgxxcrILKkPQaLphRsSE1XofKy)
 
 Чтобы поиграть перейдите по ссылке https://nikolka-net.github.io/need-for-js/
