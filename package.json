@@ -4,8 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-		"start": "electron .",
-		"build": "electron-packager ."
+    "start": "electron .",
+    "build": "electron-packager ."
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
     "electron-packager": "^15.2.0",
     "path": "^0.12.7",
     "url": "^0.11.0"
+  },
+  "dependencies": {
+    "normalize-url": "^6.0.1"
   }
 }
